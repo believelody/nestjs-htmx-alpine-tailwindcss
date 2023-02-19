@@ -9,7 +9,6 @@ export class HomeController {
   @Get()
   @Render('pages/home')
   root(@Req() req: Request & { ctx?: any }) {
-    console.log(req.ctx);
     return { ...this.homeService.getName(), ...req.ctx };
   }
 }

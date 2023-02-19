@@ -1343,12 +1343,20 @@ h6 {
   cursor: pointer;
 }
 
+.resize-none {
+  resize: none;
+}
+
 .list-none {
   list-style-type: none;
 }
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row-reverse {
@@ -1750,6 +1758,11 @@ h6 {
   line-height: 1.75rem;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1764,6 +1777,10 @@ h6 {
 
 .leading-7 {
   line-height: 1.75rem;
+}
+
+.leading-normal {
+  line-height: 1.5;
 }
 
 .leading-relaxed {
@@ -2056,6 +2073,13 @@ input[type='number'] {
   }
 }
 
+@media (min-width: 375px) {
+  .xs\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:ml-auto {
     margin-left: auto;
@@ -2094,6 +2118,11 @@ input[type='number'] {
   .sm\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:duration-700 {
@@ -2203,6 +2232,10 @@ input[type='number'] {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .lg\:justify-end {
     justify-content: flex-end;
   }
@@ -2227,9 +2260,18 @@ input[type='number'] {
     border-top-width: calc(0px * calc(1 - var(--tw-divide-y-reverse)));
     border-bottom-width: calc(0px * var(--tw-divide-y-reverse));
   }
+
+  .lg\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 
 @media (min-width: 1280px) {
+  .xl\:w-1\/2 {
+    width: 50%;
+  }
+
   .xl\:w-1\/4 {
     width: 25%;
   }

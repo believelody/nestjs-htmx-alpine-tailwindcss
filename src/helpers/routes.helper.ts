@@ -17,7 +17,7 @@ export default () => {
       label: 'Blog 2',
     },
     {
-      url: '/team',
+      url: '/teams',
       label: 'Our team',
     },
     {
@@ -25,4 +25,4 @@ export default () => {
       label: 'Products',
     },
   ];
-}
+};

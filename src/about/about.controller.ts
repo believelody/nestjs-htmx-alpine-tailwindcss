@@ -9,7 +9,6 @@ export class AboutController {
   @Render('pages/about')
   async fetchAll(@Req() req: Request & { ctx?: any }) {
     const cards = await this.aboutService.fetchAll();
-    console.log(req.ctx);
     return { cards, title: 'About', ...req.ctx };
   }
 }

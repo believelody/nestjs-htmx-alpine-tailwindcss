@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Render, Req } from '@nestjs/common';
+import { Request } from 'express';
+
+export const contactTitle = 'Contact Us';
 
 @Controller('contact')
-export class ContactController {}
+export class ContactController {
+  @Get()
+  @Render('pages/contact')
+  root(@Req() req: Request & { ctx: object }) {
+    return { titcle: contactTitle, ...req.ctx };
+  }
+}
