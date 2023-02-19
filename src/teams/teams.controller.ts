@@ -27,7 +27,7 @@ export class TeamsController {
 
   @Get()
   @Render('pages/teams')
-  async findAll(@Req() req: Request & { ctx: object }) {
+  async findAll(@Req() req: Request) {
     const teams = await this.teamsService.findAll();
     return { teams, ...req.ctx, title: teamsTitle };
   }

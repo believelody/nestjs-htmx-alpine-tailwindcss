@@ -1,9 +1,9 @@
-import { Injectable, NestMiddleware, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Injectable, NestMiddleware, Next, Req, Res } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class CheckHtmxRequestMiddleware implements NestMiddleware {
-  use(@Req() req: Request & { ctx?: any }, res: any, next: () => void) {
+  use(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
     if (req.headers['hx-request']) {
       if (req.ctx) {
         req.ctx = { layout: null, fromHTMX: true };

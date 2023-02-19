@@ -7,7 +7,7 @@ export const contactTitle = 'Contact Us';
 export class ContactController {
   @Get()
   @Render('pages/contact')
-  root(@Req() req: Request & { ctx: object }) {
+  root(@Req() req: Request) {
     return { titcle: contactTitle, ...req.ctx };
   }
 }
