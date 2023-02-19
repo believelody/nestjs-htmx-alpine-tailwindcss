@@ -1,0 +1,9 @@
+<div class="items-center hidden gap-4 md:flex" hx-get="/api/auth/check?component=header" hx-swap="outerHTML" hx-trigger="check-auth from:body">
+  {{#if isAuthenticated}}
+    {{> dropdown/user }}
+  {{else}}
+      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(object component=(partial 'icons/enter' fill="none")) ) }}
+    {{#unless (includes currentURLPathname "/login" )}}
+    {{/unless}}
+  {{/if}}
+</div>
