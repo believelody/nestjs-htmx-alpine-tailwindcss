@@ -2,7 +2,7 @@
   {{#if isAuthenticated}}
     {{> dropdown/user }}
   {{else}}
-      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(object component=(partial 'icons/enter' fill="none")) ) }}
+      {{> modal/login trigger=(partial 'button/primary-3' label="Login" x-bind="trigger" icon=(object component=(partial 'icon/enter' fill="none")) ) }}
     {{#unless (includes currentURLPathname "/login" )}}
     {{/unless}}
   {{/if}}

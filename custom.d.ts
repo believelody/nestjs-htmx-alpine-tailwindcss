@@ -1,11 +1,12 @@
 declare namespace Express {
   export interface Request {
-    ctx?: object;
+    ctx?: HttpContext;
+    session?: SessionData;
   }
 }
 
 declare namespace ExpressSession {
   export interface SessionData {
-    ctx?: object;
+    ctx?: HttpCOntext;
   }
 }

@@ -17,6 +17,7 @@ import {
 } from 'useful-handlebars-helpers';
 import { custom } from './helpers';
 import * as hbs from 'express-hbs';
+import { config } from './config';
 
 const publicDir = join(__dirname, '..', 'public');
 const viewsDir = join(__dirname, '..', 'views');
@@ -47,6 +48,6 @@ async function bootstrap() {
   app.setBaseViewsDir(viewsDir);
   app.setViewEngine('hbs');
 
-  await app.listen(3000);
+  await app.listen(config.port);
 }
 bootstrap();

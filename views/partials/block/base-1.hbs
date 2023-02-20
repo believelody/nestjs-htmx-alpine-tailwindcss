@@ -17,7 +17,7 @@
     >
         {{ item.content }}
     </p>
-    {{> (chain 'link/' (withDefault color 'default')) icon=(partial 'icons/arrow-right') label="Learn More" href=item.url }}
+    {{> (chain 'link/' (withDefault color 'default')) icon=(partial 'icon/arrow-right') label="Learn More" href=item.url }}
     {{#if footer }}
         {{> footer }}
     {{/if}}

@@ -5,6 +5,7 @@
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
+    "install2": "NODE_EXTRA_CA_CERTS=certs/IS_INFRA_ROOT_PEM.pem yarn install",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:dev": "nest start --watch",

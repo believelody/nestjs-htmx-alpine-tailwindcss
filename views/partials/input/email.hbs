@@ -2,5 +2,5 @@
     <input type="email" {{#if id}}id="{{ id }}" {{/if}} name="{{ name }}" {{#if required}}required{{/if}}
         placeholder="{{ placeholder }}" x-model="value" {{#if data-loading-disable}}data-loading-disable{{/if}} {{#if
         autocomplete}}autocomplete="{{ autocomplete }}" {{/if}} class="flex-1">
-    <button type="button" x-on:click="value = ''" class="w-18 flex items-center justify-center">{{> icons/x-mark size=6 }}</button>
+    <button type="button" x-on:click="value = ''" class="w-18 flex items-center justify-center">{{> icon/x-mark size=6 }}</button>
 </div>
