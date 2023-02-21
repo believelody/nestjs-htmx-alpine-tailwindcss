@@ -1,4 +1,4 @@
-import fetch, { RequestInit } from 'node-fetch';
+import nodeFetch, { RequestInit } from 'node-fetch';
 import {
   FetchError,
   FetchRequestOptions,
@@ -29,12 +29,12 @@ async function fetchApi<T>(
   if (options.body) {
     fetchOptions.body = JSON.stringify(options.body);
   }
-  const res = await fetch(`${config.dummyDataURL}${path}`, fetchOptions);
+  const res = await nodeFetch(`${config.dummyDataURL}${path}`, fetchOptions);
   const json: T & FetchError = (await res.json()) as FetchError & T;
   return errorUtil.handleFetchError(json);
 }
 
-const api = {
+export const fetch = {
   headers,
   setHeader: (key: string, value: string): void => {
     headers[key] = value;
@@ -78,5 +78,3 @@ const api = {
     },
   },
 };
-
-export default api;
