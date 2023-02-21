@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import * as session from 'express-session';
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import {
   array,
@@ -26,6 +29,14 @@ const layoutsDir = join(__dirname, '..', 'views/layouts');
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(cookieParser());
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'my_secret',
+      resave: false,
+    }),
+  );
   [
     array,
     misc,
