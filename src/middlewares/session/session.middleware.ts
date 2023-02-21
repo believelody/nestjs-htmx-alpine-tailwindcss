@@ -5,8 +5,8 @@ import { fetch } from 'src/fetch';
 @Injectable()
 export class PopulateUserSessionInContextMiddleware implements NestMiddleware {
   use(@Req() req: Request, _: any, @Next() next: NextFunction) {
-    const user = req.cookies.session_user;
-    const token = req.cookies.session_token;
+    const user = req.cookies?.session_user;
+    const token = req.cookies?.session_token;
     if (req.session) {
       req.session.user = user ?? req.session?.user;
       req.session.token = token ?? req.session?.token;

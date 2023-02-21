@@ -29,7 +29,6 @@ export class ProductsController {
   }
 
   @Get()
-  @Render('pages/products')
   async findAll(@Req() req: Request, @Res() res: Response) {
     const limit = Number(req.query.limit || queryUtil.limitQueryArray[0]);
     const count = Number(req.query.count || limit);
@@ -52,7 +51,7 @@ export class ProductsController {
       count,
       0,
     )) as ProductResponse;
-    return res.render('pages/product', {
+    return res.render('pages/products', {
       ...req.ctx,
       products,
       meta: { total, limit, count },
