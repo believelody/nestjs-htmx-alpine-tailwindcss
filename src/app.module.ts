@@ -21,6 +21,7 @@ import {
   PopulateCurrentURLInContextMiddleware,
 } from './middlewares/http/http.middleware';
 import { ProductsController } from './products/products.controller';
+import { PopulateUserSessionInContextMiddleware } from './middlewares/session/session.middleware';
 
 @Module({
   imports: [
@@ -36,7 +37,11 @@ import { ProductsController } from './products/products.controller';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(PopulateCurrentURLInContextMiddleware, CheckHtmxRequestMiddleware)
+      .apply(
+        PopulateCurrentURLInContextMiddleware,
+        CheckHtmxRequestMiddleware,
+        PopulateUserSessionInContextMiddleware,
+      )
       .forRoutes(
         AboutController,
         HomeController,
