@@ -8,7 +8,7 @@ export class HomeController {
 
   @Get()
   @Render('pages/home')
-  root(@Req() req: Request & { ctx?: any }) {
+  root(@Req() req: Request) {
     return { ...this.homeService.getName(), ...req.ctx };
   }
 }

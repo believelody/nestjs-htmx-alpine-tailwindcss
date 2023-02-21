@@ -16,7 +16,11 @@ import { ContactController } from './contact/contact.controller';
 import { TeamsModule } from './teams/teams.module';
 import { TeamsController } from './teams/teams.controller';
 import { ProductsModule } from './products/products.module';
-import { LimitQueryValidatorMiddleware } from './middlewares/http/http.middleware';
+import {
+  LimitQueryValidatorMiddleware,
+  PopulateCurrentURLInContextMiddleware,
+} from './middlewares/http/http.middleware';
+import { ProductsController } from './products/products.controller';
 
 @Module({
   imports: [
@@ -32,12 +36,13 @@ import { LimitQueryValidatorMiddleware } from './middlewares/http/http.middlewar
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(CheckHtmxRequestMiddleware)
+      .apply(PopulateCurrentURLInContextMiddleware, CheckHtmxRequestMiddleware)
       .forRoutes(
         AboutController,
         HomeController,
         ContactController,
         TeamsController,
+        ProductsController,
       );
 
     consumer

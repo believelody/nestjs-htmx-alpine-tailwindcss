@@ -3,9 +3,9 @@ import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class CheckHtmxRequestMiddleware implements NestMiddleware {
-  use(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
+  use(req: Request, @Res() res: Response, @Next() next: NextFunction) {
     if (req.headers['hx-request']) {
-      if (req.ctx) {
+      if (!req.ctx) {
         req.ctx = { layout: null, fromHTMX: true };
       } else {
         req.ctx = { ...req.ctx, layout: null, fromHTMX: true };

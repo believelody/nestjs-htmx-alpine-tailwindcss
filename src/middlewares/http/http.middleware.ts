@@ -21,3 +21,16 @@ export class LimitQueryValidatorMiddleware implements NestMiddleware {
     next();
   }
 }
+
+@Injectable()
+export class PopulateCurrentURLInContextMiddleware implements NestMiddleware {
+  use(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
+    if (!req.originalUrl.includes('/api')) {
+      if (req.session) {
+        req.session.currentURLPathname = req.originalUrl;
+      }
+      req.ctx = { ...req.ctx, currentURLPathname: `${req.originalUrl}` };
+    }
+    next();
+  }
+}
