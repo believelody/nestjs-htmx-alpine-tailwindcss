@@ -22,6 +22,7 @@ import {
 } from './middlewares/http/http.middleware';
 import { ProductsController } from './products/products.controller';
 import { PopulateUserSessionInContextMiddleware } from './middlewares/session/session.middleware';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PopulateUserSessionInContextMiddleware } from './middlewares/session/se
     ContactModule,
     TeamsModule,
     ProductsModule,
+    UsersModule,
   ],
   controllers: [AppController],
 })
