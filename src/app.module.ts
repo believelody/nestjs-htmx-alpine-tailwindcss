@@ -29,6 +29,8 @@ import { FetchService } from './common/fetch/fetch.service';
 import { RouterModule } from '@nestjs/core';
 import { ApiModule } from './api/api.module';
 import { ApiProductsModule } from './api/products/products.module';
+import { Posts1Module } from './posts-1/posts-1.module';
+import { Posts1Controller } from './posts-1/posts-1.controller';
 
 @Module({
   imports: [
@@ -53,6 +55,7 @@ import { ApiProductsModule } from './api/products/products.module';
     ProductsModule,
     UsersModule,
     ApiModule,
+    Posts1Module,
   ],
   controllers: [AppController],
   providers: [FetchService],
@@ -71,10 +74,14 @@ export class AppModule implements NestModule {
         ContactController,
         TeamsController,
         ProductsController,
+        Posts1Controller,
       );
 
     consumer
       .apply(LimitQueryValidatorMiddleware)
-      .forRoutes({ path: '/products', method: RequestMethod.GET });
+      .forRoutes(
+        { path: '/products', method: RequestMethod.GET },
+        { path: '/posts-1', method: RequestMethod.GET },
+      );
   }
 }
