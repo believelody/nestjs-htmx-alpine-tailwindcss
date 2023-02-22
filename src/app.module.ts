@@ -38,12 +38,6 @@ import { Posts1Controller } from './posts-1/posts-1.controller';
       {
         path: 'api',
         module: ApiModule,
-        children: [
-          {
-            path: 'products',
-            module: ApiProductsModule,
-          },
-        ],
       },
     ]),
     ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
