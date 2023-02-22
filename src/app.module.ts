@@ -23,9 +23,28 @@ import {
 import { ProductsController } from './products/products.controller';
 import { PopulateUserSessionInContextMiddleware } from './middlewares/session/session.middleware';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import appConfig from './app.config';
+import { FetchService } from './common/fetch/fetch.service';
+import { RouterModule } from '@nestjs/core';
+import { ApiModule } from './api/api.module';
+import { ApiProductsModule } from './api/products/products.module';
 
 @Module({
   imports: [
+    RouterModule.register([
+      {
+        path: 'api',
+        module: ApiModule,
+        children: [
+          {
+            path: 'products',
+            module: ApiProductsModule,
+          },
+        ],
+      },
+    ]),
+    ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
     HelpersModule,
     AboutModule,
     HomeModule,
@@ -33,8 +52,10 @@ import { UsersModule } from './users/users.module';
     TeamsModule,
     ProductsModule,
     UsersModule,
+    ApiModule,
   ],
   controllers: [AppController],
+  providers: [FetchService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

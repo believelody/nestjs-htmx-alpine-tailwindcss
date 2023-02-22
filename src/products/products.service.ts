@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { fetch } from 'src/fetch';
+import { FetchService } from 'src/common/fetch/fetch.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
+  constructor(private fetchService: FetchService) {}
+
   create(createProductDto: CreateProductDto) {
     return 'This action adds a new product';
   }
 
   async findAll(limit: number, skip: number) {
-    return await fetch.get(
+    return await this.fetchService.get(
       `/products?limit=${limit}&skip=${skip}&select=title,price,rating,category,brand,thumbnail`,
     );
   }

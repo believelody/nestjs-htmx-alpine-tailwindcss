@@ -20,7 +20,7 @@ import {
 } from 'useful-handlebars-helpers';
 import { custom } from './helpers';
 import * as hbs from 'express-hbs';
-import { config } from './config';
+import { ConfigService } from '@nestjs/config';
 
 const publicDir = join(__dirname, '..', 'public');
 const viewsDir = join(__dirname, '..', 'views');
@@ -29,6 +29,8 @@ const layoutsDir = join(__dirname, '..', 'views/layouts');
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const configService = app.get(ConfigService);
+  const port = configService.get('port');
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
   app.use(
@@ -59,6 +61,6 @@ async function bootstrap() {
   app.setBaseViewsDir(viewsDir);
   app.setViewEngine('hbs');
 
-  await app.listen(config.port);
+  await app.listen(port);
 }
 bootstrap();
