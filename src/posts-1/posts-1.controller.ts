@@ -1,12 +1,11 @@
 import { Controller, Get, Render, Req } from '@nestjs/common';
 import { Request } from 'express';
 import queryUtil from 'src/utils/query.util';
-import { HeadMeta } from 'src/common/head-meta/head-meta.interface';
 import urlUtil from 'src/utils/url.util';
 import { PostsService } from 'src/common/post/post.service';
 
 @Controller('posts-1')
-export class Posts1Controller implements HeadMeta {
+export class Posts1Controller {
   title = 'Posts with select pagination';
   constructor(private readonly postsService: PostsService) {}
 

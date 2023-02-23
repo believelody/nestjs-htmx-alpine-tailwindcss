@@ -1,10 +1,9 @@
 import { Controller, Get, Render, Req } from '@nestjs/common';
 import { Request } from 'express';
-import { HeadMeta } from 'src/common/head-meta/head-meta.interface';
 
 @Controller('login')
-export class LoginController implements HeadMeta {
-  title = '';
+export class LoginController {
+  title = 'Login Page';
 
   @Get()
   @Render('pages/login')

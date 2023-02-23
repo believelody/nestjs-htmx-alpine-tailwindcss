@@ -14,10 +14,10 @@ import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Request } from 'express';
 
-const teamsTitle = 'Our Team';
-
 @Controller('teams')
 export class TeamsController {
+  title = 'Our Team';
+
   constructor(private readonly teamsService: TeamsService) {}
 
   @Post()
@@ -29,7 +29,7 @@ export class TeamsController {
   @Render('pages/teams')
   async findAll(@Req() req: Request) {
     const teams = await this.teamsService.findAll();
-    return { teams, ...req.ctx, title: teamsTitle };
+    return { teams, ...req.ctx, title: this.title };
   }
 
   @Get(':id')

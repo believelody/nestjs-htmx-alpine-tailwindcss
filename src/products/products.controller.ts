@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Render,
   Req,
   Res,
 } from '@nestjs/common';
@@ -17,10 +16,9 @@ import { Request, Response } from 'express';
 import queryUtil from 'src/utils/query.util';
 import { ProductResponse } from './products.interface';
 
-export const productsTitle = 'Products';
-
 @Controller('products')
 export class ProductsController {
+  title = 'Products';
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
@@ -55,7 +53,7 @@ export class ProductsController {
       ...req.ctx,
       products,
       meta: { total, limit, count },
-      title: productsTitle,
+      title: this.title,
     });
   }
 
