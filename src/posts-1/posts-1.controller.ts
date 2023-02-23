@@ -1,37 +1,21 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Render,
-  Req,
-} from '@nestjs/common';
-import { Posts1Service } from './posts-1.service';
-import { CreatePosts1Dto } from './dto/create-posts-1.dto';
-import { UpdatePosts1Dto } from './dto/update-posts-1.dto';
+import { Controller, Get, Render, Req } from '@nestjs/common';
 import { Request } from 'express';
 import queryUtil from 'src/utils/query.util';
 import { HeadMeta } from 'src/common/head-meta/head-meta.interface';
+import urlUtil from 'src/utils/url.util';
+import { PostsService } from 'src/common/post/post.service';
 
 @Controller('posts-1')
 export class Posts1Controller implements HeadMeta {
   title = 'Posts with select pagination';
-  constructor(private readonly posts1Service: Posts1Service) {}
-
-  @Post()
-  create(@Body() createPosts1Dto: CreatePosts1Dto) {
-    return this.posts1Service.create(createPosts1Dto);
-  }
+  constructor(private readonly postsService: PostsService) {}
 
   @Get()
   @Render('pages/posts-1')
   async findAll(@Req() req: Request) {
     const limit = Number(req.query.limit || queryUtil.limitQueryArray[0]);
     const page = Number(req.query.page) || 1;
-    const { posts, total } = await this.posts1Service.findAll(
+    const { posts, total } = await this.postsService.findAll(
       limit,
       limit * (page - 1),
       'posts-1',
@@ -45,17 +29,30 @@ export class Posts1Controller implements HeadMeta {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.posts1Service.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePosts1Dto: UpdatePosts1Dto) {
-    return this.posts1Service.update(+id, updatePosts1Dto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.posts1Service.remove(+id);
+  @Render('pages/posts-1/id')
+  async findOne(@Req() req: Request) {
+    const id = Number(req.params.id);
+    const { post, prevPost, nextPost, author } =
+      await this.postsService.findOne(id);
+    const user = req.session?.user;
+    const liked = user?.likedPosts?.includes(Number(id));
+    return {
+      ...req.ctx,
+      post: {
+        ...post,
+        liked,
+        reactions: liked ? ++post.reactions : post.reactions,
+        url: {
+          back: urlUtil.retrieveAppropriateBackUrl(
+            req.headers['hx-current-url'] as string,
+            '/posts-1',
+          ),
+          prev: prevPost.id && `/posts-1/${prevPost.id}`,
+          next: nextPost.id && `/posts-1/${nextPost.id}`,
+        },
+      },
+      author,
+      title: post.title,
+    };
   }
 }
