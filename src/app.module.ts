@@ -32,6 +32,8 @@ import { Posts1Module } from './posts-1/posts-1.module';
 import { Posts1Controller } from './posts-1/posts-1.controller';
 import { PostsService } from './common/post/post.service';
 import { UsersService } from './users/users.service';
+import { Posts2Module } from './posts-2/posts-2.module';
+import { Posts2Controller } from './posts-2/posts-2.controller';
 
 @Module({
   imports: [
@@ -51,6 +53,7 @@ import { UsersService } from './users/users.service';
     UsersModule,
     ApiModule,
     Posts1Module,
+    Posts2Module,
   ],
   controllers: [AppController],
   providers: [FetchService, PostsService, UsersService],
@@ -70,6 +73,7 @@ export class AppModule implements NestModule {
         TeamsController,
         ProductsController,
         Posts1Controller,
+        Posts2Controller,
       );
 
     consumer
@@ -77,6 +81,7 @@ export class AppModule implements NestModule {
       .forRoutes(
         { path: '/products', method: RequestMethod.GET },
         { path: '/posts-1', method: RequestMethod.GET },
+        { path: '/posts-2', method: RequestMethod.GET },
       );
   }
 }
