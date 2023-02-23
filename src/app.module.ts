@@ -34,6 +34,7 @@ import { PostsService } from './common/post/post.service';
 import { UsersService } from './users/users.service';
 import { Posts2Module } from './posts-2/posts-2.module';
 import { Posts2Controller } from './posts-2/posts-2.controller';
+import { LoginModule } from './login/login.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { Posts2Controller } from './posts-2/posts-2.controller';
     ApiModule,
     Posts1Module,
     Posts2Module,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [FetchService, PostsService, UsersService],
