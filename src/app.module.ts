@@ -31,6 +31,7 @@ import { ApiModule } from './api/api.module';
 import { Posts1Module } from './posts-1/posts-1.module';
 import { Posts1Controller } from './posts-1/posts-1.controller';
 import { PostsService } from './common/post/post.service';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
@@ -52,7 +53,7 @@ import { PostsService } from './common/post/post.service';
     Posts1Module,
   ],
   controllers: [AppController],
-  providers: [FetchService, PostsService],
+  providers: [FetchService, PostsService, UsersService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
